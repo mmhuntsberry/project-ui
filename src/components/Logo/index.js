@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../../assets/prisma-logo.svg";
+import image from "../../assets/prisma-logo-v2.svg";
 import { logo } from "./index.module.css";
 
 const Logo = () => {
