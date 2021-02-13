@@ -1,0 +1,47 @@
+:root {
+  /* spacing */
+  --spacing-01: 0.25rem; /* 4px */
+  --spacing-02: 0.5rem; /* 8px */
+  --spacing-03: 0.75rem; /* 12px */
+  --spacing-04: 1rem; /* 16px */
+  --spacing-05: 1.25rem; /* 20px */
+  --spacing-06: 1.5rem; /* 24px */
+  --spacing-07: 2rem; /* 32px */
+  --spacing-08: 3rem; /* 48px */
+  --spacing-09: 4rem; /* 64px */
+
+  /* Icon sizes */
+  --icon-small: 1rem;
+  --icon-medium: 2rem;
+  --icon-large: 3rem;
+
+  /* Body Font Size */
+  --body-font-size-00: 0.625rem; /* 10px */
+  --body-font-size-01: 0.75rem; /* 12px */
+  --body-font-size-02: 0.875rem; /* 14px */
+  --body-font-size-03: 1rem; /* 16px */
+  --body-font-size-04: 1.25rem; /* 20px */
+  --body-font-size-05: 1.5rem; /* 24px */
+
+  --heading-font-01: 0.875rem; /* 14px */
+  --heading-font-02: 1rem; /* 16px */
+  --heading-font-03: 1.25rem; /* 20px */
+  --heading-font-04: 1.75rem; /* 28px */
+  --heading-font-05: 2.25rem; /* 36px */
+  --heading-font-06: 2.5rem; /* 40px */
+
+  /* Line heights */
+  --heading-lh-01: 1.125em; /* 18px */
+  --heading-lh-02: 1.375em; /* 22px */
+  --heading-lh-03: 1.75em; /* 28px */
+  --heading-lh-04: 2.25em; /* 36px */
+  --heading-lh-05: 2.5rem; /* 40px */
+  --heading-lh-06: 3.125rem; /* 50px */
+
+  /* Font weights */
+  --lighter: 100;
+  --light: 300;
+  --normal: 400;
+  --bold: 600;
+  --bolder: 900;
+}
