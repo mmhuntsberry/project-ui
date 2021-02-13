@@ -6,7 +6,13 @@ const Signup = () => {
     <form>
       <fieldset>
         <legend>Signup Form</legend>
-        <Input type="email" />
+        <Input
+          inputType="email"
+          inputId="email"
+          inputName="email"
+          labelFor="email"
+          labelText="Email"
+        />
       </fieldset>
     </form>
   );

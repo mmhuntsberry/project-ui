@@ -1,10 +1,24 @@
 import React from "react";
 
-const Input = ({ type = "text", name = "" }) => {
+const Input = ({
+  inputType = "text",
+  inputName = "",
+  inputId = "",
+  inputValue = "",
+  labelFor = "",
+  labelText = "",
+  placeholderText = `Enter ${inputType || "Text"}`,
+}) => {
   return (
     <>
-      <input type="radio" name="size" id="size_1" value="small" />
-      <label for="size_1">Email</label>
+      <label htmlFor={labelFor}>{labelText}</label>
+      <input
+        type={inputType}
+        name={inputName}
+        id={inputId}
+        value={inputValue}
+        placeholder={placeholderText}
+      />
     </>
   );
 };
