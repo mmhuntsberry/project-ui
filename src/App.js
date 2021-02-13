@@ -1,13 +1,19 @@
-import "./app.css";
-import Signup from "./components/Forms/Signup";
 import Header from "./components/Header";
+import { BrowserRouter } from "react-router-dom";
+import Router from "./Router";
+
+import "./app.css";
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Header />
-      <Signup />
-    </div>
+      <BrowserRouter>
+        <main className="main">
+          <Router />
+        </main>
+      </BrowserRouter>
+    </>
   );
 }
 

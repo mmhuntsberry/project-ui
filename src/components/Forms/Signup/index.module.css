@@ -1,0 +1,12 @@
+.form {
+  /* display: flex; */
+  /* align-items: center; */
+  /* max-width: 600px; */
+  /* margin: auto; */
+}
+
+.fieldset__vertical {
+  width: 500px;
+  display: grid;
+  grid-template-columns: 1fr;
+}

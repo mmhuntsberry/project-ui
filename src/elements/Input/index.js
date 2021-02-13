@@ -8,6 +8,7 @@ const Input = ({
   labelFor = "",
   labelText = "",
   placeholderText = `Enter ${inputType || "Text"}`,
+  handleTextChange,
 }) => {
   return (
     <>
@@ -18,6 +19,9 @@ const Input = ({
         id={inputId}
         value={inputValue}
         placeholder={placeholderText}
+        onChange={(evt) =>
+          handleTextChange(evt, "ON_CHANGE", evt.target.name, evt.target.value)
+        }
       />
     </>
   );
