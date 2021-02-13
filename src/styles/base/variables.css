@@ -15,6 +15,10 @@
   --icon-medium: 2rem;
   --icon-large: 3rem;
 
+  /* Font family */
+  --body: "Inter", sans-serif;
+  --heading: "Barlow", sans-serif;
+
   /* Body Font Size */
   --body-font-size-00: 0.625rem; /* 10px */
   --body-font-size-01: 0.75rem; /* 12px */

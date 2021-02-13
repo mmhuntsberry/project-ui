@@ -1,4 +1,5 @@
 .heading03 {
   font-size: var(--heading-font-03);
   line-height: var(--heading-lh-02);
+  font-family: var(--heading);
 }
