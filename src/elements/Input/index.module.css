@@ -1,0 +1,18 @@
+.input__container {
+  display: grid;
+  grid-template-columns: 200px 200px;
+  text-align: end;
+  grid-gap: 16px;
+  align-items: end;
+}
+
+.input__container:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.input {
+  padding-top: 8px;
+  border: 2px solid #000101;
+  /* background-color: #000101; */
+  border-radius: 5px;
+}
