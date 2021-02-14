@@ -1,9 +1,10 @@
 .input__container {
   display: grid;
-  grid-template-columns: 200px 200px;
+  grid-template-columns: 75px 200px;
   text-align: end;
   grid-gap: 16px;
   align-items: end;
+  justify-content: center;
 }
 
 .input__container:not(:last-child) {
@@ -11,8 +12,7 @@
 }
 
 .input {
-  padding-top: 8px;
+  padding: var(--spacing-02) var(--spacing-02);
   border: 2px solid #000101;
-  /* background-color: #000101; */
   border-radius: 5px;
 }

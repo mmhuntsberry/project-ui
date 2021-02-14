@@ -1,6 +1,6 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useState, useEffect } from "react";
 import Input from "../../../elements/Input";
-import { form, fieldset__vertical } from "./index.module.css";
+import { form, fieldset__vertical, form__button } from "./index.module.css";
 
 const formReducer = (state, action) => {
   switch (action.type) {
@@ -16,6 +16,12 @@ const formReducer = (state, action) => {
 };
 
 const Signup = () => {
+  const PROXY = "https://salty-stream-25179.herokuapp.com/";
+  const GET_USERS = `https://prisma-fe-dev-assignent.vercel.app/api/users`;
+  const [url, setUrl] = useState(
+    "https://prisma-fe-dev-assignent.vercel.app/api/register"
+  );
+
   const initialState = {
     email: "",
     password: "",
@@ -32,10 +38,36 @@ const Signup = () => {
 
   useEffect(() => {
     console.log("formState".toUpperCase(), formState);
+    // fetch(PROXY + GET_USERS, {
+    //   method: "GET",
+    //   headers: {
+    //     "Access-Control-Allow-Origin": "*",
+    //     mode: "cors",
+    //   },
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => console.log(data));
   });
 
+  const onFormSubmit = (evt) => {
+    console.log(formState);
+    evt.preventDefault();
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        body: JSON.stringify(formState),
+        mode: "cors",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+
   return (
-    <form className={form}>
+    <form className={form} onSubmit={onFormSubmit}>
       <fieldset className={fieldset__vertical}>
         {/* <legend>Signup Form</legend> */}
         <Input
@@ -56,6 +88,7 @@ const Signup = () => {
           handleTextChange={handleTextChange}
           inputValue={formState.password}
         />
+        <input className={form__button} type="submit" value="Sign up" />
       </fieldset>
     </form>
   );

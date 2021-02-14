@@ -10,3 +10,19 @@
   display: grid;
   grid-template-columns: 1fr;
 }
+
+.form__button {
+  width: 100px;
+  border: 2px solid #000101;
+  background-color: transparent;
+  padding: var(--spacing-02) var(--spacing-04);
+  border-radius: 5px;
+  justify-self: center;
+  margin-right: var(--spacing-02);
+  cursor: pointer;
+  transition: transform 0.25s ease-in-out;
+}
+
+.form__button:hover {
+  transform: translateY(-2px);
+}
