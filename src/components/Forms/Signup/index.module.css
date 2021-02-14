@@ -12,6 +12,7 @@
 }
 
 .form__button {
+  position: relative;
   width: 100px;
   border: 2px solid #000101;
   background-color: transparent;
@@ -20,9 +21,43 @@
   justify-self: center;
   margin-right: var(--spacing-02);
   cursor: pointer;
-  transition: transform 0.25s ease-in-out;
+  transition: transform 0.25s ease-in-out, color 0.25s ease-in-out;
+  overflow: hidden;
 }
 
 .form__button:hover {
-  transform: translateY(-2px);
+  color: #fff;
 }
+
+.form__button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #000101;
+  z-index: -1;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease-in-out;
+}
+
+.form__button:hover::before {
+  color: #fff;
+  transform: translateX(0%);
+}
+
+/* .button {
+  border: 1px solid #fff;
+  color: #fff;
+  height: 50px;
+  width: 100px;
+  background-color: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  overflow: hidden;
+} */
+/* 
+.form__button:hover {
+  transform: translateY(-2px);
+} */

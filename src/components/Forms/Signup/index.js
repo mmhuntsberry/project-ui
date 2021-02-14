@@ -16,8 +16,7 @@ const formReducer = (state, action) => {
 };
 
 const Signup = () => {
-  // const PROXY = "https://cors-anywhere.herokuapp.com/";
-  // const PROXY = "https://salty-stream-25179.herokuapp.com/";
+  const PROXY = "https://salty-stream-25179.herokuapp.com/";
   const GET_USERS = `https://prisma-fe-dev-assignent.vercel.app/api/users`;
   const [url] = useState(
     "https://prisma-fe-dev-assignent.vercel.app/api/register"
@@ -29,6 +28,14 @@ const Signup = () => {
   };
   const [formState, dispatch] = useReducer(formReducer, initialState);
 
+  const sendHttpRequest = (method, url, data) => {
+    return fetch(url, {
+      method: method,
+      body: JSON.stringify(data),
+      headers: data ? { "Content-type": "application/json" } : {},
+    }).then((response) => response.json());
+  };
+
   const handleTextChange = (evt, type, field, payload) => {
     dispatch({
       type,
@@ -39,38 +46,21 @@ const Signup = () => {
 
   useEffect(() => {
     console.log("formState".toUpperCase(), formState);
-    fetch(GET_USERS, {
-      method: "GET",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        mode: "cors",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    sendHttpRequest("GET", PROXY + GET_USERS).then((data) => console.log(data));
   });
 
   const onFormSubmit = (evt) => {
     console.log(formState);
     evt.preventDefault();
 
-    fetch(url, {
-      method: "POST",
-      headers: {
-        // "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        body: formState,
-        mode: "cors",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => data);
+    sendHttpRequest("POST", PROXY + url, formState).then((data) =>
+      console.log(data)
+    );
   };
 
   return (
     <form className={form} onSubmit={onFormSubmit}>
       <fieldset className={fieldset__vertical}>
-        {/* <legend>Signup Form</legend> */}
         <Input
           inputType="email"
           inputId="email"
@@ -89,7 +79,7 @@ const Signup = () => {
           handleTextChange={handleTextChange}
           inputValue={formState.password}
         />
-        <input className={form__button} type="submit" value="Sign up" />
+        <button className={form__button}>Sign up</button>
       </fieldset>
     </form>
   );
