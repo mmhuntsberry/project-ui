@@ -1,6 +1,2 @@
 @import "./styles/base/base.css";
 @import "./styles/base/variables.css";
-
-.main {
-  height: calc(100vh - 72px);
-}

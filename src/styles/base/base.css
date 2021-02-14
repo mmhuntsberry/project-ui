@@ -20,6 +20,10 @@ html {
   box-sizing: inherit;
 }
 
+.main {
+  height: calc(100vh - 72px);
+}
+
 a,
 a:link,
 a:active,
