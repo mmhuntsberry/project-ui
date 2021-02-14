@@ -53,10 +53,10 @@ const Signup = () => {
     console.log(formState);
     evt.preventDefault();
 
-    fetch(url, {
+    fetch(PROXY + url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         body: JSON.stringify(formState),
         mode: "cors",
