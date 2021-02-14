@@ -16,8 +16,9 @@ const formReducer = (state, action) => {
 };
 
 const Signup = () => {
-  const PROXY = "https://salty-stream-25179.herokuapp.com/";
-  // const GET_USERS = `https://prisma-fe-dev-assignent.vercel.app/api/users`;
+  // const PROXY = "https://cors-anywhere.herokuapp.com/";
+  // const PROXY = "https://salty-stream-25179.herokuapp.com/";
+  const GET_USERS = `https://prisma-fe-dev-assignent.vercel.app/api/users`;
   const [url] = useState(
     "https://prisma-fe-dev-assignent.vercel.app/api/register"
   );
@@ -38,30 +39,27 @@ const Signup = () => {
 
   useEffect(() => {
     console.log("formState".toUpperCase(), formState);
-    // fetch(PROXY + GET_USERS, {
-    //   method: "GET",
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //     mode: "cors",
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => console.log(data));
+    fetch(GET_USERS, {
+      method: "GET",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        mode: "cors",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   });
 
   const onFormSubmit = (evt) => {
     console.log(formState);
     evt.preventDefault();
 
-    fetch(PROXY + url, {
+    fetch(url, {
       method: "POST",
       headers: {
         // "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
-        body: JSON.stringify({
-          email: formState.email,
-          password: formState.password,
-        }),
+        body: formState,
         mode: "cors",
       },
     })
