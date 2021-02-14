@@ -1,5 +1,5 @@
 import React from "react";
-import { nav, list, item, link } from "./index.module.css";
+import { nav, list } from "./index.module.css";
 
 const Navbar = () => {
   return (

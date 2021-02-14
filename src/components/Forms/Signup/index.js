@@ -17,8 +17,8 @@ const formReducer = (state, action) => {
 
 const Signup = () => {
   const PROXY = "https://salty-stream-25179.herokuapp.com/";
-  const GET_USERS = `https://prisma-fe-dev-assignent.vercel.app/api/users`;
-  const [url, setUrl] = useState(
+  // const GET_USERS = `https://prisma-fe-dev-assignent.vercel.app/api/users`;
+  const [url] = useState(
     "https://prisma-fe-dev-assignent.vercel.app/api/register"
   );
 
@@ -58,12 +58,15 @@ const Signup = () => {
       headers: {
         // "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
-        body: JSON.stringify(formState),
+        body: JSON.stringify({
+          email: formState.email,
+          password: formState.password,
+        }),
         mode: "cors",
       },
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => data);
   };
 
   return (
