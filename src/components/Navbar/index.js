@@ -1,12 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { nav, list } from "./index.module.css";
 
 const Navbar = () => {
   return (
     <nav>
       <ul className={list}>
-        <li>Sign up</li>
-        <li>Log in</li>
+        <li>
+          <Link to="/">Sign u</Link>p
+        </li>
+        <li>
+          <Link to="/login">Log in</Link>
+        </li>
       </ul>
     </nav>
   );

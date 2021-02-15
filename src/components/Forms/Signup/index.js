@@ -1,59 +1,29 @@
-import React, { useReducer, useState, useEffect, useCallback } from "react";
+import React, { useReducer, useState, useCallback } from "react";
 import Input from "../../../elements/Input";
+import { formReducer } from "../helpers/reducers";
+// import { useHistory } from "react-router-dom";
 import {
   form,
   fieldset__vertical,
   form__button,
   formButtonDisabled,
   button,
-  formErrorMessage,
-} from "./index.module.css";
-
-const formReducer = (state, action) => {
-  let errors = state.errors;
-  const validEmailRegex = RegExp(
-    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-  );
-
-  switch (action.type) {
-    case "email":
-      errors.email = validEmailRegex.test(action.payload)
-        ? ""
-        : "Please enter a valid email address!";
-      break;
-    case "password":
-      errors.password =
-        action.payload.length < 6
-          ? "The password needs to be at least 6 characters long."
-          : "";
-      break;
-    default:
-      break;
-  }
-
-  return {
-    ...state,
-    errors,
-    [action.type]: action.payload,
-  };
-};
+} from "../index.module.css";
 
 const Signup = () => {
   const PROXY = "https://salty-stream-25179.herokuapp.com/";
-  const [url] = useState(
-    "https://prisma-fe-dev-assignent.vercel.app/api/register"
-  );
-  const [err, setErr] = useState(null);
+  const URL = "https://prisma-fe-dev-assignent.vercel.app/api/register";
 
-  const initialState = {
+  // const history = useHistory();
+  const [err, setErr] = useState(null);
+  const [formState, dispatch] = useReducer(formReducer, {
     email: "",
     password: "",
     errors: {
       email: "",
       password: "",
     },
-  };
-  const [formState, dispatch] = useReducer(formReducer, initialState);
+  });
 
   const sendHttpRequest = (method, url, data) => {
     return fetch(url, {
@@ -85,6 +55,29 @@ const Signup = () => {
     });
   };
 
+  const onFormSubmit = (evt) => {
+    console.log(formState);
+    evt.preventDefault();
+
+    sendHttpRequest("POST", PROXY + URL, formState).then((data) => {
+      // if (data) {
+      //   history.push("/account");
+      // }
+    });
+  };
+
+  const onEmailBlur = (evt) => {
+    sendHttpRequest("POST", PROXY + URL, formState).then((data) =>
+      console.log("data".toUpperCase(), data)
+    );
+  };
+
+  const onPasswordBlur = (evt) => {
+    sendHttpRequest("POST", PROXY + URL, formState).then((data) =>
+      console.log("data".toUpperCase(), data)
+    );
+  };
+
   const disabledBtn = useCallback(() => {
     console.log(formState.email.length);
     return formState.email.length > 0 &&
@@ -99,33 +92,6 @@ const Signup = () => {
     formState.errors.email,
     formState.errors.password,
   ]);
-
-  useEffect(() => {
-    console.log("formState".toUpperCase(), formState);
-
-    console.log("err".toUpperCase(), err);
-  }, [err, formState, disabledBtn]);
-
-  const onFormSubmit = (evt) => {
-    console.log(formState);
-    evt.preventDefault();
-
-    sendHttpRequest("POST", PROXY + url, formState).then((data) =>
-      console.log("data".toUpperCase(), data)
-    );
-  };
-
-  const onEmailBlur = (evt) => {
-    sendHttpRequest("POST", PROXY + url, formState).then((data) =>
-      console.log("data".toUpperCase(), data)
-    );
-  };
-
-  const onPasswordBlur = (evt) => {
-    sendHttpRequest("POST", PROXY + url, formState).then((data) =>
-      console.log("data".toUpperCase(), data)
-    );
-  };
 
   const renderError = () => {
     if (err.errorMessage.includes("password")) return;

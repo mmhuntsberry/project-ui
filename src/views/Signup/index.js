@@ -1,5 +1,5 @@
 import React from "react";
-import { form__container } from "./index.module.css";
+import { form__container } from "../index.module.css";
 import Form from "../../components/Forms/Signup";
 
 const Signup = () => {
