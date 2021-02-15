@@ -1,13 +1,4 @@
-.nav {
-}
-
 .list {
   display: flex;
   gap: var(--spacing-08);
-}
-
-.item {
-}
-
-.link {
 }

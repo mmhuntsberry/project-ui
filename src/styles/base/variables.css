@@ -48,4 +48,10 @@
   --normal: 400;
   --bold: 600;
   --bolder: 900;
+
+  /* Theme */
+  --black: #000101;
+  --white: #fffafa;
+  --grey: #ccc;
+  --red: #f00;
 }

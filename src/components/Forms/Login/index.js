@@ -10,9 +10,8 @@ import { formReducer } from "../helpers/reducers";
 import { useHistory } from "react-router-dom";
 
 import {
-  form,
-  fieldset__vertical,
-  form__button,
+  fieldsetVertical,
+  formButton,
   formButtonDisabled,
   button,
 } from "../index.module.css";
@@ -65,6 +64,7 @@ const Login = () => {
           return null;
         });
       }
+      return () => {};
     });
   }, [formState.email, history, setUser, postStatus]);
 
@@ -107,8 +107,8 @@ const Login = () => {
   return (
     <>
       <span>{postStatus?.errorMessage && postStatus.errorMessage}</span>
-      <form className={form} onSubmit={onFormSubmit}>
-        <fieldset className={fieldset__vertical}>
+      <form onSubmit={onFormSubmit}>
+        <fieldset className={fieldsetVertical}>
           <Input
             inputType="email"
             inputId="email"
@@ -137,7 +137,7 @@ const Login = () => {
             className={
               disabledBtn()
                 ? `${button} ${formButtonDisabled}`
-                : `${button} ${form__button}`
+                : `${button} ${formButton}`
             }
           >
             Log in

@@ -3,9 +3,8 @@ import Input from "../../../elements/Input";
 import { formReducer } from "../helpers/reducers";
 import { useHistory } from "react-router-dom";
 import {
-  form,
-  fieldset__vertical,
-  form__button,
+  fieldsetVertical,
+  formButton,
   formButtonDisabled,
   button,
 } from "../index.module.css";
@@ -103,8 +102,8 @@ const Signup = () => {
   return (
     <>
       <span>{err && renderError()}</span>
-      <form className={form} onSubmit={onFormSubmit}>
-        <fieldset className={fieldset__vertical}>
+      <form onSubmit={onFormSubmit}>
+        <fieldset className={fieldsetVertical}>
           <Input
             inputType="email"
             inputId="email"
@@ -134,7 +133,7 @@ const Signup = () => {
             className={
               disabledBtn()
                 ? `${button} ${formButtonDisabled}`
-                : `${button} ${form__button}`
+                : `${button} ${formButton}`
             }
           >
             Sign up

@@ -5,11 +5,11 @@ import { formReducer } from "../helpers/reducers";
 
 import {
   form,
-  fieldset__vertical,
-  form__button,
+  fieldsetVertical,
+  formButton,
   button,
   formButtonDisabled,
-} from "../../Forms/index.module.css";
+} from "../index.module.css";
 
 import {
   inputContainer,
@@ -36,7 +36,7 @@ const Account = () => {
     },
   });
 
-  const sendHttpRequest = (method, url, data) => {
+  const sendHttpRequest = (method, url, data, setStatus) => {
     return fetch(url, {
       method: method,
       body: JSON.stringify(data),
@@ -52,7 +52,7 @@ const Account = () => {
 
         return data;
       })
-      .catch((err) => setErr({ errorMessage: err.toString() }));
+      .catch((err) => setStatus({ errorMessage: err.toString() }));
   };
 
   const handleTextChange = (evt, type, field, payload) => {
@@ -108,7 +108,7 @@ const Account = () => {
 
   return (
     <form className={form} onSubmit={onFormSubmit}>
-      <fieldset className={fieldset__vertical}>
+      <fieldset className={fieldsetVertical}>
         <Input
           inputType="text"
           inputId="name"
@@ -168,7 +168,7 @@ const Account = () => {
           className={
             disabledBtn()
               ? `${button} ${formButtonDisabled}`
-              : `${button} ${form__button}`
+              : `${button} ${formButton}`
           }
         >
           Save
