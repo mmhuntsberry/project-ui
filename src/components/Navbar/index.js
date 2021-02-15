@@ -1,16 +1,15 @@
-import React, { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { nav, list } from "./index.module.css";
 
 const Navbar = () => {
-  const { value, setValue } = useContext(UserContext);
-  const location = useLocation();
+  const { user } = useContext(UserContext);
 
-  console.log(location.pathname);
+  useEffect(() => {}, [user]);
 
-  return value && location.pathname === `/user/${value.id}` ? (
-    <div>Hello, {value && value.name}</div>
+  return user ? (
+    <div>Hello, {user.name}</div>
   ) : (
     <nav>
       <ul className={list}>

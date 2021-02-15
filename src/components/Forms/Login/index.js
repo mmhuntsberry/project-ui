@@ -24,7 +24,7 @@ const Login = () => {
   const USERS = "https://prisma-fe-dev-assignent.vercel.app/api/users";
 
   const history = useHistory();
-  const { value, setValue } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const [postStatus, setPostStatus] = useState({ errorMessage: "" });
   const [formState, dispatch] = useReducer(formReducer, {
     email: "",
@@ -54,24 +54,19 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log("postStatus", postStatus);
-
     sendHttpRequest("GET", PROXY + USERS).then((data) => {
       if (data) {
         return data.find((user) => {
-          user.email === formState.email && setValue(user);
-          console.log("value", value);
-          console.log(user);
+          user.email === formState.email && setUser(user);
 
-          postStatus?.message && history.push(`/user/${user.id}`);
+          setTimeout(() => {
+            postStatus?.message && history.push(`/user/${user.id}`);
+          }, 300);
+          return null;
         });
       }
     });
-
-    // if (postStatus?.message && value) {
-    //   history.push(`/user/${value.id}`);
-    // }
-  }, [postStatus]);
+  }, [formState.email, history, setUser, postStatus]);
 
   const handleTextChange = (evt, type, field, payload) => {
     if (evt.target.value.length === 0) {
@@ -87,7 +82,6 @@ const Login = () => {
 
   const onFormSubmit = (evt) => {
     evt.preventDefault();
-    console.log("clicked");
 
     sendHttpRequest("POST", PROXY + URL, formState)
       .then((data) => {

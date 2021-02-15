@@ -1,7 +1,7 @@
-import React, { useReducer, useState, useCallback } from "react";
+import React, { useReducer, useState, useCallback, useContext } from "react";
 import Input from "../../../elements/Input";
 import { formReducer } from "../helpers/reducers";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   form,
   fieldset__vertical,
@@ -9,12 +9,14 @@ import {
   formButtonDisabled,
   button,
 } from "../index.module.css";
+import { UserContext } from "../../../contexts/UserContext";
 
 const Signup = () => {
   const PROXY = "https://salty-stream-25179.herokuapp.com/";
   const URL = "https://prisma-fe-dev-assignent.vercel.app/api/register";
 
-  // const history = useHistory();
+  const history = useHistory();
+  const { setUser } = useContext(UserContext);
   const [err, setErr] = useState(null);
   const [formState, dispatch] = useReducer(formReducer, {
     email: "",
@@ -56,30 +58,28 @@ const Signup = () => {
   };
 
   const onFormSubmit = (evt) => {
-    console.log(formState);
     evt.preventDefault();
 
     sendHttpRequest("POST", PROXY + URL, formState).then((data) => {
-      // if (data) {
-      //   history.push("/account");
-      // }
+      if (data) {
+        setUser(data);
+
+        setTimeout(() => {
+          history.push(`/user/${data.id}`);
+        }, 250);
+      }
     });
   };
 
   const onEmailBlur = (evt) => {
-    sendHttpRequest("POST", PROXY + URL, formState).then((data) =>
-      console.log("data".toUpperCase(), data)
-    );
+    sendHttpRequest("POST", PROXY + URL, formState).then((data) => data);
   };
 
   const onPasswordBlur = (evt) => {
-    sendHttpRequest("POST", PROXY + URL, formState).then((data) =>
-      console.log("data".toUpperCase(), data)
-    );
+    sendHttpRequest("POST", PROXY + URL, formState).then((data) => data);
   };
 
   const disabledBtn = useCallback(() => {
-    console.log(formState.email.length);
     return formState.email.length > 0 &&
       formState.password.length >= 6 &&
       !formState.errors.email &&

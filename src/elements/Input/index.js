@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
-import { render } from "react-dom";
+import React from "react";
 import HelperText01 from "../HelperText01";
-
 import { inputContainer, input, inputLabel } from "./index.module.css";
 
 const Input = ({
