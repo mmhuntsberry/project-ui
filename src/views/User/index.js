@@ -104,16 +104,15 @@ const User = () => {
           <label className={inputLabel} htmlFor="team-select">
             Team
           </label>
-          <select className={input} name="pets" id="team-select">
-            <option value="admins" selected={value?.team === "admins"}>
-              Admins
-            </option>
-            <option value="users" selected={value?.team === "users"}>
-              Users
-            </option>
-            <option value="viewers" selected={value?.team === "viewers"}>
-              Viewers
-            </option>
+          <select
+            className={input}
+            name="pets"
+            id="team-select"
+            defaultValue={value?.team}
+          >
+            <option value="admins">Admins</option>
+            <option value="users">Users</option>
+            <option value="viewers">Viewers</option>
           </select>
         </div>
 
