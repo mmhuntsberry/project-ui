@@ -1,14 +1,16 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { nav, list } from "./index.module.css";
 
 const Navbar = () => {
   const { user } = useContext(UserContext);
+  const location = useLocation();
+  const { pathname } = location;
 
-  useEffect(() => {}, [user]);
+  useEffect(() => {}, [user, location]);
 
-  return user ? (
+  return user && pathname.includes("user") ? (
     <div>Hello, {user.name}</div>
   ) : (
     <nav>
