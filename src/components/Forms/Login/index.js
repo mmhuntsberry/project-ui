@@ -25,7 +25,8 @@ const Login = () => {
 
   const history = useHistory();
   const { value, setValue } = useContext(UserContext);
-  const [err, setErr] = useState(null);
+  const [postStatus, setPostStatus] = useState({ errorMessage: "" });
+  const [getErr, setGetErr] = useState(null);
   const [formState, dispatch] = useReducer(formReducer, {
     email: "",
     password: "",
@@ -35,36 +36,49 @@ const Login = () => {
     },
   });
 
-  useEffect(() => {
-    console.log(UserContext);
-  }, []);
-
   const sendHttpRequest = (method, url, data) => {
     return fetch(url, {
       method: method,
       body: JSON.stringify(data),
       headers: data ? { "Content-type": "application/json" } : {},
-    })
-      .then(async (response) => {
-        const data = await response.json();
+    }).then(async (response) => {
+      const data = await response.json();
 
-        if (!response.ok) {
-          const error = (data && data.message) || response.status;
-          return Promise.reject(error);
-        }
+      if (!response.ok) {
+        const error = (data && data.message) || response.status;
 
-        return data;
-      })
-      .catch((err) => {
-        console.log("HELLO ERR", err);
-        setErr({ errorMessage: err.toString() });
-      });
+        return Promise.reject(error);
+      }
+
+      return data;
+    });
   };
+
+  useEffect(() => {
+    console.log("postStatus", postStatus);
+
+    sendHttpRequest("GET", PROXY + USERS).then((data) => {
+      if (data) {
+        return data.find((user) => {
+          user.email === formState.email && setValue(user);
+          console.log("value", value);
+          console.log(user);
+
+          postStatus?.message && history.push(`/user/${user.id}`);
+        });
+      }
+    });
+
+    // if (postStatus?.message && value) {
+    //   history.push(`/user/${value.id}`);
+    // }
+  }, [postStatus]);
 
   const handleTextChange = (evt, type, field, payload) => {
     if (evt.target.value.length === 0) {
-      setErr(null);
+      setPostStatus(null);
     }
+
     dispatch({
       type,
       field,
@@ -73,26 +87,17 @@ const Login = () => {
   };
 
   const onFormSubmit = (evt) => {
-    console.log(formState);
     evt.preventDefault();
+    console.log("clicked");
 
-    sendHttpRequest("POST", PROXY + URL, formState).then((data) => data);
-
-    sendHttpRequest("GET", PROXY + USERS).then((data) => {
-      console.log("DATA222", data);
-      if (data) {
-        data.find((user) => {
-          console.log(user.email);
-          console.log(formState.email);
-          return user.email === formState.email ? setValue(user) : null;
-        });
-        history.push("/account");
-      }
-    });
+    sendHttpRequest("POST", PROXY + URL, formState)
+      .then((data) => {
+        setPostStatus(data);
+      })
+      .catch((err) => setPostStatus({ errorMessage: err }));
   };
 
   const disabledBtn = useCallback(() => {
-    console.log(formState.email.length);
     return formState.email.length > 0 &&
       formState.password.length >= 6 &&
       !formState.errors.email &&
@@ -108,7 +113,7 @@ const Login = () => {
 
   return (
     <>
-      <span>{err && err.errorMessage}</span>
+      <span>{postStatus?.errorMessage && postStatus.errorMessage}</span>
       <form className={form} onSubmit={onFormSubmit}>
         <fieldset className={fieldset__vertical}>
           <Input
