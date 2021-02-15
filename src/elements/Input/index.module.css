@@ -1,18 +1,29 @@
-.input__container {
+.inputContainer {
   display: grid;
+  grid-template-areas:
+    "label input"
+    ". error";
   grid-template-columns: 75px 200px;
-  text-align: end;
-  grid-gap: 16px;
+  grid-row: 1fr 20px;
+  grid-column-gap: 16px;
+  grid-row-gap: 4px;
   align-items: end;
   justify-content: center;
 }
 
-.input__container:not(:last-child) {
-  margin-bottom: 16px;
+.inputLabel {
+  grid-area: label;
+  text-align: end;
+}
+
+.inputContainer:not(:first-child) {
+  margin-top: 16px;
 }
 
 .input {
-  padding: var(--spacing-02) var(--spacing-02);
+  grid-area: input;
+  height: 40px;
+  padding: 0 var(--spacing-02);
   border: 2px solid #000101;
   border-radius: 5px;
 }

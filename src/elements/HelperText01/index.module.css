@@ -1,0 +1,5 @@
+.helperText01 {
+  font-size: var(--body-font-size-01);
+  grid-area: error;
+  color: #f00;
+}

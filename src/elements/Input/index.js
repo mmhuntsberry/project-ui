@@ -1,5 +1,8 @@
-import React from "react";
-import { input__container, input } from "./index.module.css";
+import React, { useEffect } from "react";
+import { render } from "react-dom";
+import HelperText01 from "../HelperText01";
+
+import { inputContainer, input, inputLabel } from "./index.module.css";
 
 const Input = ({
   inputType = "text",
@@ -10,10 +13,20 @@ const Input = ({
   labelText = "",
   placeholderText = `Enter ${inputType || "Text"}`,
   handleTextChange,
+  handleBlur,
+  errors,
 }) => {
+  const renderErrorState = () => {
+    if (inputValue.length === 0) return "";
+    return errors && <HelperText01 message={errors} />;
+  };
+
   return (
-    <div className={input__container}>
-      <label htmlFor={labelFor}>{labelText}</label>
+    <div className={inputContainer}>
+      <label className={inputLabel} htmlFor={labelFor}>
+        {labelText}
+      </label>
+
       <input
         className={input}
         type={inputType}
@@ -22,9 +35,16 @@ const Input = ({
         value={inputValue}
         placeholder={placeholderText}
         onChange={(evt) =>
-          handleTextChange(evt, "ON_CHANGE", evt.target.name, evt.target.value)
+          handleTextChange(
+            evt,
+            evt.target.name,
+            evt.target.name,
+            evt.target.value
+          )
         }
+        onBlur={handleBlur}
       />
+      {renderErrorState()}
     </div>
   );
 };
