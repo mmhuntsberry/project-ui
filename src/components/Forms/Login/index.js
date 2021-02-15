@@ -26,7 +26,6 @@ const Login = () => {
   const history = useHistory();
   const { value, setValue } = useContext(UserContext);
   const [postStatus, setPostStatus] = useState({ errorMessage: "" });
-  const [getErr, setGetErr] = useState(null);
   const [formState, dispatch] = useReducer(formReducer, {
     email: "",
     password: "",
